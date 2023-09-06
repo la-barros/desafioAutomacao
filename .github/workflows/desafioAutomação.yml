@@ -39,9 +39,10 @@ jobs:
       - name: Step 3 Execute collection
         run: newman run ./DesafioAutomacao.postman_collection.json -e ./Cloud.postman_environment.json --reporters cli, -r htmlextra --reporter-htmlextra-export ./results/Report.html || true
 
-      # Runs a set of commands using the runners shell
-      - name: Step 4 Archive production artifacts
-        uses: actions/upload-artifact@v2
+     # Runs a set of commands using the runners shell
+      - name: Step 4 Archive Production artifacts
+        if: ${{ always() }} # This ensures the step runs even if the previous steps fail
+        uses: actions/upload-artifact@v3
         with:
-            name: report
-            path: ./results/Report.html
+          name: report
+          path: ./docs/index.html
