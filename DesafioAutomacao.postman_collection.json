@@ -1,0 +1,4925 @@
+{
+	"info": {
+		"_postman_id": "2fb84821-1768-49d6-8cf6-59df73f04066",
+		"name": "DesafioAutomacao",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21745640"
+	},
+	"item": [
+		{
+			"name": "Login_Master",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"token_login\", JSON.parse(responseBody).token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"mail\":\"sysadmin@qacoders.com\",\r\n \"password\": \"1234@Test\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PBI_5557",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response not be null\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error).not.to.be.null;\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterSucess",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.expect();\r",
+							"});\r",
+							"\r",
+							"// const response = pm.response.json(); \r",
+							"// pm.environment.set(\"id\", response.newCompany._id);\r",
+							"// pm.environment.set(\"id_address\", response.newCompany.address[0]._id);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check corporateName is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"corporateName\")).to.eql(JSON.parse(responseBody).CorporateName)\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check registerCompany is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"registerCompany\")).to.eql(JSON.parse(responseBody).RegisterCompany)\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check responsableContact is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"responsableContact\")).to.eql(JSON.parse(responseBody).ResponsableContact)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check mail is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"mail\")).to.eql(JSON.parse(responseBody).Mail)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check telephone is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"telephone\")).to.eql(JSON.parse(responseBody).Phone)\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check serviceDescription is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"serviceDescription\")).to.eql(JSON.parse(responseBody).ServiceDescription)\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check matriz is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"matriz\")).to.eql(JSON.parse(responseBody).Matriz)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check country is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"country\")).to.eql(JSON.parse(responseBody).Country)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check zipCode is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"zipCode \")).to.eql(JSON.parse(responseBody).ZipCode)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check city is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"city\")).to.eql(JSON.parse(responseBody).City)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check state is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"state\")).to.eql(JSON.parse(responseBody).UF)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check district is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"district\")).to.eql(JSON.parse(responseBody).District)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check street is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"street\")).to.eql(JSON.parse(responseBody).Street)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check number is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"number\")).to.eql(JSON.parse(responseBody).Number)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check complement is True\", function () {\r",
+							"    pm.expect(pm.variables.get(\"complement\")).to.eql(JSON.parse(responseBody).Complement)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CorporateNameUnsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal(\"O campo 'Nome da empresa' é obrigatório.\");\r",
+							"\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": null,\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registerunsuccessful obrigatório",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal(\"O campo 'Nome da empresa' é obrigatório.\");\r",
+							"\r",
+							"})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \" \",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CorporateNamensuccessful Max100 caracteres",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal(\"O campo 'Nome da empresa' deve ter no máximo 100 caracteres.\");\r",
+							"\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon Leannon \",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CNPJunsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'CNPJ' da empresa é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": null,\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CNPJunsuccessful Somentenumero",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'CNPJ' da empresa deve ter no máximo 14 caracteres numéricos.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": \"g12546326933\",\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CNPJunsuccessful NãoDuplicidade",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { alert } = pm.response.json()\r",
+							"pm.expect(alert[0]).to.equal (\"Essa companhia já está cadastrada. Verifique o nome, CNPJ e a razão social da companhia.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": \"83204266100375\",\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Razãounsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Razão Social' da empresa é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": null,\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Razãounsuccessful Obrigatório",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Razão Social' da empresa é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \" \",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Responsávelunsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Contado do Responsável' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": null,\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Responsávelunsuccessful Obrigatório",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Contado do Responsável' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \" \",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Responsávelunsuccessful 100Caracters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Contado do Responsável' deve ter no máximo 100 caracteres.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"Garden Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas Gardem Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas Garden Lucas\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Telefoneunsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Telefone' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": null,\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Telefoneunsuccessful Somentenúmero",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Telefone' deve conter somente números.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \" \",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Telefoneunsuccessful Max15Caracters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal(\"O campo 'Telefone' deve ter no máximo 14 caracteres.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"+4895632147896549587459699\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Emailunsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal ( \"O campo 'Email' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": null,\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Emailunsuccessful Obrigatório",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Email' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Emailunsuccessful Formato",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Email' informado é inválido. Informe um e-mail no formato [nome@domínio.com].\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"Gonçalvestech@qacoders\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Emailunsuccessful FormatoSem .",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Email' informado é inválido. Informe um e-mail no formato [nome@domínio.com].\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"Gonçalvestechqacoders.com\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Descriçãolunsuccessful Obrigatório",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Descrição' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Descriçãolunsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal (\"O campo 'Descrição' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": null,\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logradourolunsuccessful Obrigatório",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal(\"O campo 'logradouro' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \" \",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logradourolunsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"const { error } = pm.response.json()\r",
+							"pm.expect(error[0]).to.equal(\"O campo 'logradouro' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": null,\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Númerolunsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'número' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": null,\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Númerolunsuccessful Max10Caracters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'número' deve possuir no máximo 10 caracteres.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": 236547895423,\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bairrolunsuccessful Obrigatório",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'bairro' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bairrolunsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'bairro' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bairrolunsuccessful Max50Caracters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'bairro' deve possuir no máximo 50 caracteres.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cidadelunsuccessful Obrigatório",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'cidade' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \" \",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cidadelunsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'cidade' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": null,\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cidadelunsuccessful SomenteLetras",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'cidade' só pode conter letras e os caracteres especiais 'ª', 'º', '‘' e '-'.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": 1456987,\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cidadelunsuccessful Max50Caracters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'cidade' deve possuir no máximo 50 caracteres.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EstadoUnsuccessful Obrigatório",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'estado' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EstadoUnsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'estado' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": null,\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EstadoUnsuccessful SomenteLetra",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'estado' só pode conter letras maiúsculas\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": 25,\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EstadoUnsuccessful SomenteDuasLetras",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'estado' deve possuir 2 caracteres.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"LOP\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaísUnsuccessful Obrigatório",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo País é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"\",\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PaísUnsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo País é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": null,\r\n            \"zipCode\": \"{{ZipCode}}\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CepUnsuccessful SomenteNúmeros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'CEP' só pode conter números\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"grt14568\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CepUnsuccessful ObrigatórioNull",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'CEP' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": null,\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CepUnsuccessful Obrigatório",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response correct message\", function () {\r",
+							"    const { error } = pm.response.json()\r",
+							"    pm.expect(error[0]).to.equal(\"O campo 'CEP' é obrigatório.\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"CorporateName\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"let num3dig = 10000000000000 + Math.floor(Math.random() * 89999999999999) \r",
+							"pm.environment.set(\"CNPJ\", num3dig);\r",
+							"\r",
+							"pm.environment.set(\"Contact\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \" \" + pm.variables.replaceIn(\"{{$randomLastName}}\"));\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"Mail\", pm.variables.replaceIn(\"{{$randomLastName}}\") + \"@qacoders.com\");\r",
+							"\r",
+							"\r",
+							"let num4dig = 100000000000 + Math.floor(Math.random() * 899999999999) \r",
+							"pm.environment.set(\"Phone\", \"+55\" + num4dig);\r",
+							"\r",
+							"pm.environment.set(\"ServiceDescription\", pm.variables.replaceIn(\"{{$randomCompanyName}}\") + \" \" + \"Treinamento de Qualidade de Software\");\r",
+							"\r",
+							"pm.environment.set(\"Matriz\", pm.variables.replaceIn(\"{{$randomBs}}\" + \" \" + \"S/A\"));\r",
+							"\r",
+							"let num5dig = 10000 + Math.floor(Math.random() * 89999) \r",
+							"pm.environment.set(\"ZipCode\", num5dig + \"000\");\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"City\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"UF\", pm.variables.replaceIn(\"{{$randomCountryCode}}\"));\r",
+							"\r",
+							"pm.environment.set(\"District\", pm.variables.replaceIn(\"{{$randomCity}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Street\", pm.variables.replaceIn(\"{{$randomStreetName}}\"));\r",
+							"\r",
+							"pm.environment.set(\"Number\", Math.floor(Math.random() * 99));\r",
+							"\r",
+							"function end() {\r",
+							"\r",
+							"    var end = [\"Loja\",\"Loja 2\",\"Fundos\", \"2º andar\",\"4º andar\", \"Loja 20\", \"SobreLoja\", \"5º andar\", \"Loja 25\"];\r",
+							"\r",
+							"    var randomCompl = end[Math.floor(Math.random() * end.length)];\r",
+							"\r",
+							"return randomCompl;\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"Complement\", end());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "{{token_login}}",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "Authorization",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"corporateName\": \"{{CorporateName}}\",\r\n    \"registerCompany\": {{CNPJ}},\r\n    \"responsibleContact\": \"{{Contact}}\",\r\n    \"mail\": \"{{Mail}}\",\r\n    \"telephone\": \"{{Phone}}\",\r\n    \"serviceDescription\": \"{{ServiceDescription}}\",\r\n    \"matriz\": \"{{Matriz}}\",\r\n    \"address\": [\r\n        {\r\n            \"country\": \"{{Country}}\",\r\n            \"zipCode\": \"\",\r\n            \"city\": \"{{City}}\",\r\n            \"state\": \"{{UF}}\",\r\n            \"district\": \"{{District}}\",\r\n            \"street\": \"{{Street}}\",\r\n            \"number\": \"{{Number}}\",\r\n            \"complement\": \"{{Complement}}\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/company",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"company"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{tokenLogin}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
