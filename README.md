@@ -2,7 +2,7 @@
 
 ## QualityEagles-automation-postman-nodeexpress-erp
 
-Este repositório tem uma página de publicação do "report" do teste que utiliza o Github Pages para servir páginas estáticas. Esse relatório será renovado todas as vezes que o teste for realizado.
+Este repositório tem uma página de publicação do "report" do teste que utiliza o Github.
 
 # API-QA.CODERS
 # AUTOMAÇÃO BACK-END
